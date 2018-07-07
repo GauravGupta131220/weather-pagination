@@ -1,0 +1,37 @@
+<div class="container-fluid" style="margin-left:10%">
+	<div class="row" *ngFor="let forecast of weekForecast | paginate: { itemsPerPage: 2, currentPage: p, id: 'futureForecasts'}; let i = index ">
+		<div class="col-md-12" style="margin-top:1%">
+			<div class="row">
+				<div class="col-md-8">
+					<div class="card">
+						<h5 class="card-header">
+							{{this.forecast.day.condition.text}} on {{this.forecast.date | date :'fullDate'}}
+						</h5>
+						<div class="card-body">
+							<div class="row card-text">
+								<div class="col-md-6">
+									Maximum Temperautre: <span style="color: #ff0000"> {{this.forecast.day.maxtemp_c}}&deg;C</span>
+								</div>
+								<div class="col-md-6">
+									Minimum Temperature: <span style="color: #0000ff">{{this.forecast.day.mintemp_c}}&deg;C</span>
+								</div>
+							</div>
+							<div class="row card-text">
+								<div class="col-md-6">
+									Sunrise: {{this.forecast.astro.sunrise}}
+								</div>
+								<div class="col-md-6">
+									Sunset: {{this.forecast.astro.sunset}}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<img alt="Bootstrap Image Preview" src="{{this.forecast.day.condition.icon}}" style="height:140px; width:140px" />
+				</div>
+			</div>
+		</div>
+	</div>
+	<pagination-controls (pageChange)="p = $event" id="futureForecasts"></pagination-controls>
+</div>

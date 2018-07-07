@@ -1,0 +1,73 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<nav class="navbar navbar-expand-lg navbar-light bg-light">
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="navbar-toggler-icon"></span>
+				</button> <a class="navbar-brand" href="#">THE DAILY WEATHER</a>
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<form class="form-inline">
+						<input class="form-control mr-sm-2" name="city" type="text" [(ngModel)]="city" />
+						<button class="btn btn-primary my-2 my-sm-0 " type="submit" (click)="searchTemperature(city)">
+							Search
+						</button>
+					</form>
+				</div>
+				<button class="btn btn-danger my-2 my-sm-0 float-right " type="submit" (click)="resetForecast(city)">
+							Reset
+			    </button>
+			</nav>
+		</div>
+
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="row">
+						<div class="col-md-6">
+							<div class="jumbotron">
+								<h2>
+									The DAILY Weather
+								</h2>
+								<p>
+									Only Website to give you 10 days of weather prediction at a single click!
+								</p>
+								<p>
+									<a class="btn btn-primary btn-large" href="#">Learn more</a>
+								</p>
+							</div>
+						</div>
+						<div *ngIf="currentForecastFlag" class="col-md-6" style="margin-top: 3%">
+							<div class="row">
+								<div class="col-md-8">
+									<div class="card text-white bg-primary">
+										<h5 class="card-header">
+											{{this.tempertures.location.name}}
+										</h5>
+										<div class="card-body">
+											<div class="row card-text">
+												<div class="col-md-6">
+													Currently <strong>{{this.currentForecast[1].temp_c}}&deg;C</strong>
+												</div>
+												<div class="col-md-6">
+													Feels Like {{this.currentForecast[1].feelslike_c}}&deg;C
+												</div>
+											</div>
+										</div>
+										<div class="card-footer">
+											<b>{{this.currentForecast[1].condition.text}}</b> <span> on {{this.tempertures.location.localtime | date :'fullDate'}}</span>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<img alt="Bootstrap Image Preview" style="height:140px; width:140px" src="{{imageUrl}}" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<app-weather-details *ngIf="futureForecastFlag" [futureForecast]="futureForecast"></app-weather-details>
